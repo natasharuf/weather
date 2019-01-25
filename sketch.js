@@ -8,7 +8,7 @@ let place;
 let country;
 let time;
 let description;
-let icon;
+let icon="";
 
 
 let d=600;
@@ -33,9 +33,9 @@ function setup() {
     let url = 'https://api.apixu.com/v1/forecast.json?key='+key+'&q=Zürich&days=7';
 
     input = createInput();
-    input.position(width/2-85, 85);
+    input.position(width/2-85, 100);
     button = createButton('search');
-    button.position(input.x + input.width, 85,);
+    button.position(input.x + input.width, 100,);
     button.mousePressed(reloadJson);
 
 
@@ -45,29 +45,30 @@ function setup() {
 
 
 function draw() {
-background(60);
+//background(0,0);
+clear();
 fill(255);
 drawTime();
     fill(170)
     textFont('SanFranciscoDisplay-Light');
     textSize(13);
-    text(time+"", width/2,height/2-270);
+    text(time+"", width/2,height/2-260);
 drawPlace();
     fill(255);
     textFont('SanFranciscoDisplay-Medium');
     textSize(30);
     text(place+", "+country, width/2,height/2-230);
-/*drawIcon();
-    textSize(10);
-    text(icon+"", width/2,height/2);*/
+drawIcon();
+    //textSize(10);
+    //text(icon+"", width/2,height/2);
 drawTemperature();
     textSize(150);
     textFont('SanFranciscoDisplay-Medium');
-    text(temp+"°C", width/2,height/2);
+    text(temp+"°C", width/2+50,height/2+20);
 drawDescription();
     textSize(20);
     textFont('SanFranciscoDisplay-Light');
-    text(description+"", width/2,height/2+100);
+    text(description+"", width/2+50,height/2+100);
 
 }
 
@@ -84,8 +85,10 @@ function text() {
     time=weather.location.localtime;
     temp=weather.current.temp_c;
     description=weather.current.condition.text;
-    icon=weather.current.condition.icon;
 
+    let iconUrl=weather.current.condition.icon;
+   icon=createImg(iconUrl);
+  //console.log(iconUrl);
 
 }
 
@@ -208,7 +211,7 @@ function drawDescription(){
 
 }
 
-/*function drawIcon(){
+function drawIcon(){
 
   let days=weatherdays.length;
   let angle=360/days;
@@ -216,6 +219,9 @@ function drawDescription(){
   push();//wir speichern das Koordinatensystem ab
   fill(150,4,20);
   translate(width/2, height/2,);//wir verschieben das Koordinatensystem in die Mitte
+if(icon!=""){
+  image(icon, -170, -170, 130, 130);
+}
 
   fill(0);
   for(let s=0;s<days;s++){
@@ -227,4 +233,4 @@ function drawDescription(){
 
   pop();//wir setzen das Koordinatensystem zurück
 
-}*/
+}
