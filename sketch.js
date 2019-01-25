@@ -64,7 +64,7 @@ drawIcon();
 drawTemperature();
     textSize(150);
     textFont('SanFranciscoDisplay-Medium');
-    text(temp+"°C", width/2+50,height/2+20);
+    text(temp+"°", width/2+50,height/2+20);
 drawDescription();
     textSize(20);
     textFont('SanFranciscoDisplay-Light');
